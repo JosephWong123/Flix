@@ -11,6 +11,8 @@ import AlamofireImage
 
 class MovieDetailsViewController: UIViewController {
 
+    @IBOutlet weak var moveScreen: UIButton!
+  //  @IBOutlet var onTap: UITapGestureRecognizer!
     @IBOutlet weak var backdropView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
@@ -38,15 +40,27 @@ class MovieDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    /*
+    @IBAction func didTap(_ sender: UIGestureRecognizer) {
+        print("Hi")
+        performSegue(withIdentifier: "UIImageView", sender: self)
+    }
+    
+  
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender! as! MovieDetailsViewController
+        let key = cell.movie["key"] as! String
+        let vidUrl = URL(string: "https://www.youtube.com/watch?v=\\" + key)
+    
+        let trailerView = segue.destination as! TrailerViewController
+        
+        let vidRequest = URLRequest(url: vidUrl!)
+        trailerView.webViewer.load(vidRequest)
+            
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }
